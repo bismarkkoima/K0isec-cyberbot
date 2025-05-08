@@ -3,37 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K0isec GPT Chat</title>
+    <title>k0isec GPT Chat</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="wrapper">
-        <header>
-            <div class="logo-container">
-                <img src="https://drive.google.com/uc?id=1iuiuQm03QGa4-1ks_v8VjqriUvalZyYl" alt="K0isec Logo" style="height: 80px;">
-                <h1><span class="green">K0</span>isec <span class="green">GPT</span> Terminal</h1>
-                <p class="tagline">&#9656; Secure. Encrypted. Anonymous.</p>
+    <header>
+        <div class="logo-container">
+            <img src="static/images/koisec-logoofl.png" alt="K0isec Logo" class="logo">
+        </div>
+        <div class="text-container">
+            <h1><span class="green">k0</span>isec<span class="green">GPT</span></h1>
+            <p class="tagline">&#9656; Secure. Encrypted. Anonymous.</p>
+        </div>
+    </header>
+    <main>
+        <div class="terminal-window">
+            <div id="chat-log" class="chat-log">
+                <!-- System message -->
+                <div class="message system">k0i: Welcome to the k0isec AI Terminal. How can I assist you?</div>
             </div>
-        </header>
-
-        <main>
-            <div class="terminal-window">
-                <div id="chat-log" class="chat-log">
-                    <!-- System message -->
-                    <div class="message system">K0i: Welcome to the K0isec AI Terminal. How can I assist you?</div>
-                </div>
-                <div class="input-area">
-                    <input type="text" id="user-input" placeholder="Type your command..." autofocus autocomplete="off">
-                    <button id="send-btn">Send</button>
-                </div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Type your command..." autofocus autocomplete="off">
+                <button id="send-btn">Send</button>
             </div>
-        </main>
+        </div>
+    </main>
 
-        <footer>
-            <p>K0isec <span class="green">Cyber Sentinel</span> &copy; 2025</p>
-        </footer>
-    </div>
+    <footer>
+        <p>k0isec <span class="green">Cyber Sentinel</span> &copy; 2025</p>
+    </footer>
 
     <script>
         const inputField = document.getElementById("user-input");

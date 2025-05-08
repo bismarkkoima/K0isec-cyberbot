@@ -1,4 +1,4 @@
-/* General Reset and Base Styles */
+/* Reset margin and padding for all elements */
 * {
   margin: 0;
   padding: 0;
@@ -17,20 +17,51 @@ body {
 }
 
 header {
-  background: linear-gradient(90deg, #ff0000 0%, #560000 100%);
+  background: linear-gradient(90deg, #0C0C0C 0%, #560000 100%);
   padding: 20px;
-  text-align: center;
-  color: black;
-  font-size: 2rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 2px 20px #00ff9f88;
+  flex-wrap: wrap; /* Allows elements to stack when needed */
 }
 
-/* Chat Container Styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Keeps the logo to the left */
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
+  border-radius: 25%;
+  object-fit: cover;
+}
+
+.text-container {
+  text-align: center;
+  margin: 0 auto;
+  flex-grow: 1; /* Allow text to fill available space */
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 0.6rem;
+  color: #ffffff;
+}
+
+/* Chat container styling */
 .container {
-  flex: 1;
-  max-width: 960px;
-  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 1100px;  /* Increase max-width for a wider chatbox */
+  width: 90%;  /* Makes it responsive */
+  margin: 30px auto;  /* Center the container horizontally */
   padding: 20px;
   background-color: #121212;
   border: 1px solid #00ff9f55;
@@ -39,6 +70,7 @@ header {
   animation: fadeIn 1s ease-in-out;
 }
 
+/* Chat box styling */
 .chat-box {
   max-height: 500px;
   overflow-y: auto;
@@ -46,7 +78,7 @@ header {
   border: 1px solid #00ff9f33;
   background-color: #0f0f0f;
   border-radius: 8px;
-  max-width: fit-content;
+  width: 100%;  /* Chatbox spans the full width of the container */
   margin-bottom: 15px;
   scroll-behavior: smooth;
 }
@@ -55,7 +87,6 @@ header {
   margin-bottom: 12px;
 }
 
-/* User and Bot Message Styling */
 .message {
   max-width: 70%;
   padding: 10px 15px;
@@ -67,35 +98,36 @@ header {
   word-wrap: break-word;
 }
 
-/* User Message Styling (Right Aligned) */
+/* User message styling */
 .message.user {
-  background-color: #0a0a0a; /* Darker green for better visibility */
+  background-color: #0a0a0a;
+  border: #ffffff;
   align-self: flex-end;
   text-align: right;
   margin-left: auto;
   border-top-right-radius: 0;
 }
 
-/* Bot Message Styling (Left Aligned) */
+/* AI message styling */
 .message.ai {
-  background-color: #560000; /* Lighter gray for better contrast */
+  background-color: #560000;
   align-self: flex-start;
   text-align: left;
   margin-right: auto;
   border-top-left-radius: 0;
 }
 
-/* System Messages */
+/* System message styling */
 .message.system {
   background-color: #444444;
   color: #bbb;
   text-align: center;
   font-style: normal;
-  padding: 4px;
+  padding: 2px;
   width: 480px;
 }
 
-/* Input Field and Button Styles */
+/* Form input styling */
 form {
   display: flex;
   gap: 10px;
@@ -126,12 +158,11 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 button:hover {
   background-color: #00e68a;
 }
 
-/* Scrollbar */
+/* Scrollbar styling */
 .chat-box::-webkit-scrollbar {
   width: 10px;
 }
@@ -145,21 +176,13 @@ button:hover {
   background: transparent;
 }
 
-/* Animations */
+/* Fade in animation */
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Glowing Logo */
-#logo {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
+/* Glowing effect for the logo */
 .glowing-logo {
   animation: glowing 1s infinite;
 }
@@ -170,7 +193,6 @@ button:hover {
   100% { box-shadow: 0 0 10px #00ff9f, 0 0 20px #00ff9f, 0 0 30px #00ff9f, 0 0 40px #00ff9f; }
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 20px;
