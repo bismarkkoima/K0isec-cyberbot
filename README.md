@@ -99,6 +99,15 @@ pytest -q
 
 The tests use a fake model, so they don't need Ollama. They also run automatically on GitHub Actions.
 
+### Evaluation
+
+```bash
+python -m evaluation.evaluate_checker                       # scam checker accuracy on 50 labelled messages
+python -m evaluation.compare_models llama3.2:3b phi3:mini   # compare local models (needs Ollama)
+```
+
+The usability-study kit is in [evaluation/USER_TESTING.md](evaluation/USER_TESTING.md).
+
 ## Project structure
 
 ```
@@ -112,6 +121,7 @@ guardian/
 templates/              Jinja2 pages
 static/                 CSS and JavaScript (no inline scripts)
 tests/                  Unit and route tests
+evaluation/             Scam-checker accuracy test, model comparison, user-testing kit
 docs/CAPSTONE_REPORT.md Capstone write-up
 ```
 
