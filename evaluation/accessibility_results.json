@@ -1,0 +1,336 @@
+{
+  "axe": [
+    {
+      "scheme": "light",
+      "vp": "desktop",
+      "path": "/",
+      "violations": [],
+      "passes": 42
+    },
+    {
+      "scheme": "light",
+      "vp": "desktop",
+      "path": "/check",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "light",
+      "vp": "desktop",
+      "path": "/lessons",
+      "violations": [],
+      "passes": 38
+    },
+    {
+      "scheme": "light",
+      "vp": "desktop",
+      "path": "/lessons/spot-a-scam",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "light",
+      "vp": "desktop",
+      "path": "/help",
+      "violations": [],
+      "passes": 43
+    },
+    {
+      "scheme": "light",
+      "vp": "phone",
+      "path": "/",
+      "violations": [],
+      "passes": 42
+    },
+    {
+      "scheme": "light",
+      "vp": "phone",
+      "path": "/check",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "light",
+      "vp": "phone",
+      "path": "/lessons",
+      "violations": [],
+      "passes": 38
+    },
+    {
+      "scheme": "light",
+      "vp": "phone",
+      "path": "/lessons/spot-a-scam",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "light",
+      "vp": "phone",
+      "path": "/help",
+      "violations": [],
+      "passes": 43
+    },
+    {
+      "scheme": "dark",
+      "vp": "desktop",
+      "path": "/",
+      "violations": [],
+      "passes": 42
+    },
+    {
+      "scheme": "dark",
+      "vp": "desktop",
+      "path": "/check",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "dark",
+      "vp": "desktop",
+      "path": "/lessons",
+      "violations": [],
+      "passes": 38
+    },
+    {
+      "scheme": "dark",
+      "vp": "desktop",
+      "path": "/lessons/spot-a-scam",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "dark",
+      "vp": "desktop",
+      "path": "/help",
+      "violations": [],
+      "passes": 43
+    },
+    {
+      "scheme": "dark",
+      "vp": "phone",
+      "path": "/",
+      "violations": [],
+      "passes": 42
+    },
+    {
+      "scheme": "dark",
+      "vp": "phone",
+      "path": "/check",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "dark",
+      "vp": "phone",
+      "path": "/lessons",
+      "violations": [],
+      "passes": 38
+    },
+    {
+      "scheme": "dark",
+      "vp": "phone",
+      "path": "/lessons/spot-a-scam",
+      "violations": [],
+      "passes": 41
+    },
+    {
+      "scheme": "dark",
+      "vp": "phone",
+      "path": "/help",
+      "violations": [],
+      "passes": 43
+    }
+  ],
+  "targets": [
+    {
+      "vp": "desktop",
+      "path": "/",
+      "small": [
+        {
+          "t": "INPUT",
+          "w": 40,
+          "h": 40,
+          "tag": "INPUT"
+        }
+      ]
+    },
+    {
+      "vp": "desktop",
+      "path": "/check",
+      "small": []
+    },
+    {
+      "vp": "desktop",
+      "path": "/lessons",
+      "small": []
+    },
+    {
+      "vp": "desktop",
+      "path": "/lessons/spot-a-scam",
+      "small": []
+    },
+    {
+      "vp": "desktop",
+      "path": "/help",
+      "small": []
+    },
+    {
+      "vp": "phone",
+      "path": "/",
+      "small": [
+        {
+          "t": "INPUT",
+          "w": 38,
+          "h": 40,
+          "tag": "INPUT"
+        }
+      ]
+    },
+    {
+      "vp": "phone",
+      "path": "/check",
+      "small": []
+    },
+    {
+      "vp": "phone",
+      "path": "/lessons",
+      "small": []
+    },
+    {
+      "vp": "phone",
+      "path": "/lessons/spot-a-scam",
+      "small": []
+    },
+    {
+      "vp": "phone",
+      "path": "/help",
+      "small": []
+    }
+  ],
+  "fonts": [
+    {
+      "size": "normal",
+      "body": "16px",
+      "topic": "16px"
+    },
+    {
+      "size": "large",
+      "body": "20px",
+      "topic": "20px"
+    },
+    {
+      "size": "xlarge",
+      "body": "24px",
+      "topic": "24px"
+    }
+  ],
+  "overflow": [],
+  "tasks": [
+    {
+      "id": "T1",
+      "name": "Make the text bigger",
+      "ok": true,
+      "actions": 1,
+      "result": "body text 24px",
+      "ms": 132
+    },
+    {
+      "id": "T2",
+      "name": "Ask about a caller wanting the bank PIN",
+      "ok": true,
+      "actions": 2,
+      "result": "📞 Phone call scams",
+      "ms": 113
+    },
+    {
+      "id": "T3",
+      "name": "Check message (scam)",
+      "ok": true,
+      "actions": 3,
+      "result": "🔴 High risk: This looks like a scam. Please do not reply, click or pay.",
+      "ms": 306
+    },
+    {
+      "id": "T4",
+      "name": "Check message (genuine)",
+      "ok": true,
+      "actions": 3,
+      "result": "🟢 Low risk: No obvious warning signs found - but stay cautious.",
+      "ms": 195
+    },
+    {
+      "id": "T5",
+      "name": "Check message (scam)",
+      "ok": true,
+      "actions": 3,
+      "result": "🔴 High risk: This looks like a scam. Please do not reply, click or pay.",
+      "ms": 220
+    },
+    {
+      "id": "T6",
+      "name": "Complete 'How to spot a scam' lesson and quiz",
+      "ok": true,
+      "actions": 4,
+      "result": "You got 2 out of 2 right. Excellent - you're a scam spotter!",
+      "ms": 252
+    },
+    {
+      "id": "T7",
+      "name": "Find what to do after being scammed",
+      "ok": true,
+      "actions": 1,
+      "result": "🆘 I think I've been scammed",
+      "ms": 138
+    }
+  ],
+  "keyboard": [
+    {
+      "el": "Skip to main content",
+      "outline": true
+    },
+    {
+      "el": "K0isec Guardian",
+      "outline": true
+    },
+    {
+      "el": "A",
+      "outline": true
+    },
+    {
+      "el": "A+",
+      "outline": true
+    },
+    {
+      "el": "A++",
+      "outline": true
+    },
+    {
+      "el": "💬 Ask a question",
+      "outline": true
+    },
+    {
+      "el": "🔍 Check a message",
+      "outline": true
+    },
+    {
+      "el": "📘 Lessons",
+      "outline": true
+    },
+    {
+      "el": "🆘 I think I've been scammed",
+      "outline": true
+    },
+    {
+      "el": "Type your question here…",
+      "outline": true
+    },
+    {
+      "el": "🎤 Speak",
+      "outline": true
+    },
+    {
+      "el": "Send ➤",
+      "outline": true
+    }
+  ]
+}

@@ -8,6 +8,9 @@ __pycache__/
 venv/
 .pytest_cache/
 
+# Node (used only by the accessibility audit)
+node_modules/
+
 # Editors / OS
 .vscode/
 .idea/
