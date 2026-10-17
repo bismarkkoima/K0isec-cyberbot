@@ -131,6 +131,114 @@ h2 { font-size: 1.4rem; }
 .message .source { font-size: .8rem; color: var(--muted); margin-top: .5rem; }
 
 .chat-form { margin-top: 1rem; }
+
+/* "Liquid glass" question box: frosted panel over slowly moving colour */
+:root {
+  --glass-tint: rgba(255, 255, 255, 0.45);
+  --glass-field: rgba(255, 255, 255, 0.62);
+  --glass-field-focus: rgba(255, 255, 255, 0.88);
+  --glass-edge: rgba(255, 255, 255, 0.75);
+  --glass-shadow: rgba(60, 20, 30, 0.16);
+  --blob-1: rgba(122, 0, 25, 0.45);
+  --blob-2: rgba(11, 107, 58, 0.38);
+  --blob-3: rgba(255, 191, 71, 0.5);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-tint: rgba(40, 40, 40, 0.45);
+    --glass-field: rgba(18, 18, 18, 0.6);
+    --glass-field-focus: rgba(18, 18, 18, 0.85);
+    --glass-edge: rgba(255, 255, 255, 0.22);
+    --glass-shadow: rgba(0, 0, 0, 0.5);
+    --blob-1: rgba(255, 107, 129, 0.4);
+    --blob-2: rgba(76, 217, 138, 0.3);
+    --blob-3: rgba(255, 179, 71, 0.35);
+  }
+}
+
+.glass {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 28px;
+  background: var(--glass-tint);
+  border: 1px solid var(--glass-edge);
+  box-shadow:
+    inset 0 1px 1px var(--glass-edge),
+    inset 0 -8px 24px rgba(255, 255, 255, 0.08),
+    0 12px 32px var(--glass-shadow);
+  transition: box-shadow .4s ease, transform .4s ease;
+}
+.glass:focus-within {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 1px var(--glass-edge),
+    inset 0 -8px 24px rgba(255, 255, 255, 0.12),
+    0 18px 44px var(--glass-shadow),
+    0 0 0 4px rgba(255, 191, 71, 0.45);
+}
+
+/* The moving colour the glass sits on */
+.glass-liquid {
+  position: absolute;
+  inset: -60%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 25% 35%, var(--blob-1), transparent 32%),
+    radial-gradient(circle at 72% 55%, var(--blob-2), transparent 30%),
+    radial-gradient(circle at 45% 80%, var(--blob-3), transparent 28%);
+  filter: blur(28px);
+  animation: liquid-drift 16s ease-in-out infinite alternate;
+  transition: opacity .4s ease;
+  opacity: .75;
+}
+.glass:focus-within .glass-liquid { opacity: 1; animation-duration: 8s; }
+
+@keyframes liquid-drift {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33%  { transform: translate(6%, -4%) rotate(40deg) scale(1.08); }
+  66%  { transform: translate(-5%, 5%) rotate(-25deg) scale(0.95); }
+  100% { transform: translate(3%, 2%) rotate(70deg) scale(1.05); }
+}
+
+.glass-field { position: relative; border-radius: 20px; overflow: hidden; }
+.glass-field textarea {
+  display: block;
+  background: var(--glass-field);
+  border: 1.5px solid var(--glass-edge);
+  border-radius: 20px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(14px) saturate(170%);
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  resize: vertical;
+  transition: background .3s ease, border-color .3s ease;
+}
+.glass-field textarea:focus { background: var(--glass-field-focus); border-color: var(--text); }
+.glass-field textarea:focus-visible { outline-offset: -4px; }
+
+/* A streak of light that sweeps across when the box is selected */
+.glass-field::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -60%;
+  width: 40%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-12deg);
+  opacity: 0;
+}
+.glass-field:focus-within::after { animation: glass-sheen 1.1s ease-out; }
+@keyframes glass-sheen {
+  0%   { left: -60%; opacity: 0; }
+  20%  { opacity: 1; }
+  100% { left: 130%; opacity: 0; }
+}
+
+/* Browsers without backdrop-filter get a solid, still readable box */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-field textarea { background: var(--surface); }
+}
 textarea, input[type="text"], input[type="tel"] {
   width: 100%; font: inherit; font-size: 1.1rem; padding: .75rem; color: var(--text);
   background: var(--surface); border: 2px solid var(--text); border-radius: var(--radius);
@@ -198,4 +306,6 @@ textarea, input[type="text"], input[type="tel"] {
 
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
+  .glass-liquid, .glass-field::after { animation: none !important; }
+  .glass:focus-within { transform: none; }
 }

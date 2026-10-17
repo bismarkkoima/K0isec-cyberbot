@@ -14,10 +14,13 @@
                <em>"Someone phoned saying they're from my bank. What should I do?"</em></p>
         </div>
     </div>
-    <form id="chat-form" class="chat-form">
-        <label for="user-input" class="visually-hidden">Your question</label>
-        <textarea id="user-input" rows="2" maxlength="2000"
-                  placeholder="Type your question here…" required></textarea>
+    <form id="chat-form" class="chat-form glass">
+        <span class="glass-liquid" aria-hidden="true"></span>
+        <div class="glass-field">
+            <label for="user-input" class="visually-hidden">Your question</label>
+            <textarea id="user-input" rows="2" maxlength="2000"
+                      placeholder="Type your question here…" required></textarea>
+        </div>
         <div class="chat-buttons">
             <button type="button" id="voice-btn" class="btn btn-secondary" hidden>🎤 Speak</button>
             <button type="submit" class="btn btn-primary">Send ➤</button>
