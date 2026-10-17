@@ -1,80 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>k0isec GPT Chat</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <img src="static/images/koisec-logoofl.png" alt="K0isec Logo" class="logo">
+{% extends "base.html" %}
+{% block content %}
+<section class="intro">
+    <h1>Hello! I'm your cyber-safety helper.</h1>
+    <p>Ask me anything about staying safe online, on the phone or with your money.
+       There are no silly questions.</p>
+</section>
+
+<section class="card chat-card" aria-labelledby="chat-heading">
+    <h2 id="chat-heading" class="visually-hidden">Chat</h2>
+    <div id="chat-log" class="chat-log" aria-live="polite">
+        <div class="message bot">
+            <p>Hello! You can type a question below, or tap one of the topics. For example:
+               <em>"Someone phoned saying they're from my bank. What should I do?"</em></p>
         </div>
-        <div class="text-container">
-            <h1><span class="green">k0</span>isec<span class="green">GPT</span></h1>
-            <p class="tagline">&#9656; Secure. Encrypted. Anonymous.</p>
+    </div>
+    <form id="chat-form" class="chat-form">
+        <label for="user-input" class="visually-hidden">Your question</label>
+        <textarea id="user-input" rows="2" maxlength="2000"
+                  placeholder="Type your question here…" required></textarea>
+        <div class="chat-buttons">
+            <button type="button" id="voice-btn" class="btn btn-secondary" hidden>🎤 Speak</button>
+            <button type="submit" class="btn btn-primary">Send ➤</button>
         </div>
-    </header>
-    <main>
-        <div class="terminal-window">
-            <div id="chat-log" class="chat-log">
-                <!-- System message -->
-                <div class="message system">k0i: Welcome to the k0isec AI Terminal. How can I assist you?</div>
-            </div>
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="Type your command..." autofocus autocomplete="off">
-                <button id="send-btn">Send</button>
-            </div>
-        </div>
-    </main>
+    </form>
+    <label class="toggle">
+        <input type="checkbox" id="read-aloud"> 🔊 Read answers out loud
+    </label>
+</section>
 
-    <footer>
-        <p>k0isec <span class="green">Cyber Sentinel</span> &copy; 2025</p>
-    </footer>
-
-    <script>
-        const inputField = document.getElementById("user-input");
-        const sendBtn = document.getElementById("send-btn");
-        const chatLog = document.getElementById("chat-log");
-
-        sendBtn.addEventListener("click", sendMessage);
-        inputField.addEventListener("keypress", function(e) {
-            if (e.key === "Enter") sendMessage();
-        });
-
-        function appendMessage(content, role = "user") {
-            const messageEl = document.createElement("div");
-            messageEl.classList.add("message", role);
-            messageEl.textContent = content;  // Display the message content directly
-            chatLog.appendChild(messageEl);
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-
-        async function sendMessage() {
-            const message = inputField.value.trim();
-            if (!message) return;
-            appendMessage(message, "user");
-            inputField.value = "";
-            try {
-                const res = await fetch("/chat", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ message })
-                });
-                const data = await res.json();
-                if (data.reply) {
-                    appendMessage(data.reply, "ai");
-                } else {
-                    appendMessage("Error: " + data.error, "ai");
-                }
-            } catch (err) {
-                appendMessage("Error: Failed to reach server", "ai");
-            }
-        }
-    </script>
-</body>
-</html>
+<section aria-labelledby="topics-heading">
+    <h2 id="topics-heading">Or choose a topic</h2>
+    <div class="topic-grid">
+        {% for t in topics %}
+        <button type="button" class="topic-btn" data-topic="{{ t.id }}">
+            <span class="topic-icon" aria-hidden="true">{{ t.icon }}</span>
+            <span>{{ t.title }}</span>
+        </button>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='chat.js') }}"></script>{% endblock %}

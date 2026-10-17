@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Check a message - K0isec Guardian{% endblock %}
+{% block content %}
+<section class="intro">
+    <h1>Is this message a scam?</h1>
+    <p>Copy and paste a text message, email or what a caller said into the box below.
+       I'll look for the warning signs scammers use and explain them.</p>
+</section>
+
+<section class="card">
+    <form id="check-form">
+        <label for="check-input" class="field-label">The message:</label>
+        <textarea id="check-input" rows="7" maxlength="5000" required
+                  placeholder="For example: URGENT - your account has been suspended. Click here to verify your details…"></textarea>
+        <button type="submit" class="btn btn-primary btn-wide">🔍 Check this message</button>
+    </form>
+    <p class="hint">Tip: you don't need to include your own name or address.</p>
+</section>
+
+<section id="check-result" class="card result" hidden aria-live="polite">
+    <h2 id="result-headline"></h2>
+    <div id="result-flags"></div>
+    <h3>What to do next</h3>
+    <ul id="result-advice" class="big-list"></ul>
+    <p class="hint">This check looks for common warning signs. A message with no warning signs can still be a scam -
+       if in doubt, ask someone you trust.</p>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='check.js') }}"></script>{% endblock %}

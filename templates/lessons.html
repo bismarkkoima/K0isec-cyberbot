@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Lessons - K0isec Guardian{% endblock %}
+{% block content %}
+<section class="intro">
+    <h1>Short safety lessons</h1>
+    <p>Each lesson takes just a few minutes and ends with a short quiz. Go at your own pace.</p>
+</section>
+<div class="lesson-grid">
+    {% for l in lessons %}
+    <a class="card lesson-card" href="{{ url_for('lesson_page', lesson_id=l.id) }}">
+        <span class="topic-icon" aria-hidden="true">{{ l.icon }}</span>
+        <h2>{{ l.title }}</h2>
+        <p>About {{ l.minutes }} minutes · {{ l.quiz|length }} questions</p>
+        <p class="lesson-done" data-lesson-done="{{ l.id }}" hidden>✅ Completed</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='lessons.js') }}"></script>{% endblock %}

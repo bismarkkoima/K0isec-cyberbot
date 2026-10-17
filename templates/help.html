@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}I think I've been scammed - K0isec Guardian{% endblock %}
+{% block content %}
+<section class="card help-card">
+    <h1>🆘 I think I've been scammed</h1>
+    <p class="lead">Take a deep breath. <strong>It is not your fault</strong> - scammers are professionals who
+       trick thousands of people every day. Acting quickly can help.</p>
+    <ol class="big-list steps">
+        <li><strong>Call your bank now</strong> using the phone number on the back of your bank card.
+            Tell them what happened and ask them to stop any payments.</li>
+        <li><strong>Change your passwords</strong>, starting with your email, then your bank and shopping accounts.</li>
+        <li><strong>If someone connected to your computer</strong>, turn off the Wi-Fi or unplug the internet cable,
+            and ask a trusted person or repair shop to check it.</li>
+        <li><strong>Report it</strong> to the police or your national fraud reporting service.
+            Keep any messages, phone numbers and receipts.</li>
+        <li><strong>Tell someone you trust</strong> - a family member, friend or neighbour. You don't have to deal with this alone.</li>
+        <li><strong>Watch out for "recovery" offers.</strong> Anyone promising to get your money back for a fee is
+            usually another scammer.</li>
+    </ol>
+</section>
+
+<section class="card">
+    <h2>My important phone numbers</h2>
+    <p>Write these down so you have them ready. They are only saved on this computer.</p>
+    <form id="contacts-form" class="contacts-form">
+        <label>My bank's fraud line <input type="tel" name="bank" autocomplete="off"></label>
+        <label>A trusted family member or friend <input type="text" name="family" autocomplete="off"></label>
+        <label>Police (non-emergency) <input type="tel" name="police" autocomplete="off"></label>
+        <button type="submit" class="btn btn-primary">💾 Save numbers</button>
+        <p id="contacts-saved" class="hint" aria-live="polite"></p>
+    </form>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='help.js') }}"></script>{% endblock %}

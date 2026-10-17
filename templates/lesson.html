@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ lesson.title }} - K0isec Guardian{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('lessons_page') }}" class="back-link">← All lessons</a></p>
+<section class="card">
+    <h1><span aria-hidden="true">{{ lesson.icon }}</span> {{ lesson.title }}</h1>
+    <ol class="big-list lesson-points">
+        {% for p in lesson.points %}<li>{{ p }}</li>{% endfor %}
+    </ol>
+    <button type="button" class="btn btn-secondary" id="read-lesson">🔊 Read this lesson aloud</button>
+</section>
+
+<section class="card" id="quiz" data-lesson-id="{{ lesson.id }}" aria-labelledby="quiz-heading">
+    <h2 id="quiz-heading">Quick quiz</h2>
+    {% for item in lesson.quiz %}
+    {% set qi = loop.index0 %}
+    <fieldset class="quiz-question" data-answer="{{ item.answer }}">
+        <legend>{{ loop.index }}. {{ item.q }}</legend>
+        {% for opt in item.options %}
+        <button type="button" class="quiz-option" data-index="{{ loop.index0 }}">{{ opt }}</button>
+        {% endfor %}
+        <p class="quiz-feedback" aria-live="polite" hidden data-why="{{ item.why }}"></p>
+    </fieldset>
+    {% endfor %}
+    <p id="quiz-score" class="quiz-score" aria-live="polite" hidden></p>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='lessons.js') }}"></script>{% endblock %}
