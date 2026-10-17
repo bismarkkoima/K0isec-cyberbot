@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}K0isec Guardian{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/koisec-logoofl.png') }}">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/koisec-logoofl.png') }}" alt="" class="logo">
+            <span class="brand-text">K0isec <strong>Guardian</strong></span>
+        </a>
+        <div class="text-size" role="group" aria-label="Text size">
+            <span class="text-size-label">Text size</span>
+            <button type="button" data-size="normal" aria-label="Normal text">A</button>
+            <button type="button" data-size="large" aria-label="Large text">A+</button>
+            <button type="button" data-size="xlarge" aria-label="Extra large text">A++</button>
+        </div>
+    </header>
+
+    <nav class="main-nav" aria-label="Main">
+        {% set ep = request.endpoint %}
+        <a href="{{ url_for('index') }}" {% if ep == 'index' %}aria-current="page"{% endif %}>💬 Ask a question</a>
+        <a href="{{ url_for('check_page') }}" {% if ep == 'check_page' %}aria-current="page"{% endif %}>🔍 Check a message</a>
+        <a href="{{ url_for('lessons_page') }}" {% if ep in ('lessons_page', 'lesson_page') %}aria-current="page"{% endif %}>📘 Lessons</a>
+        <a href="{{ url_for('help_page') }}" class="nav-help" {% if ep == 'help_page' %}aria-current="page"{% endif %}>🆘 I think I've been scammed</a>
+    </nav>
+
+    <main id="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>🔒 Private by design: K0isec Guardian runs on this computer. Your messages are not sent to the internet.</p>
+        <p class="status" id="ai-status" aria-live="polite">Checking assistant…</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
