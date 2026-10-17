@@ -299,7 +299,28 @@ textarea, input[type="text"], input[type="tel"] {
 .site-footer p { margin: .25rem 0; }
 
 @media (max-width: 600px) {
-  .main-nav .nav-help { margin-left: 0; }
+  /* Compact header: logo, name and text-size buttons on one row */
+  .site-header { padding: .5rem .75rem; flex-wrap: nowrap; gap: .5rem; }
+  .brand { font-size: 1.05rem; gap: .5rem; min-width: 0; }
+  .logo { width: 40px; height: 40px; }
+  .text-size-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .text-size { gap: .3rem; flex-shrink: 0; }
+  .text-size button { min-width: 44px; min-height: 44px; font-size: .85rem; padding: 0 .25rem; }
+
+  /* Compact menu: a 2 x 2 grid of large, easy-to-tap buttons */
+  .main-nav { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; padding: .5rem .75rem; }
+  .main-nav a {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    min-height: 44px; padding: .45rem .4rem; font-size: .85rem; line-height: 1.25;
+    border-color: var(--border);
+  }
+  .main-nav .nav-help { margin-left: 0; border-color: var(--high); }
+
+  main { padding: .75rem; }
+  .card { padding: .9rem; }
+  .glass { padding: .75rem; }
+  .chat-buttons { flex-wrap: nowrap; }
+  .chat-buttons .btn { flex: 1; padding: .6rem .5rem; }
   .message { max-width: 100%; }
   h1 { font-size: 1.5rem; }
 }
