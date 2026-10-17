@@ -15,6 +15,7 @@ class KnowledgeTests(unittest.TestCase):
             "How do I make a strong password?": "passwords",
             "They want me to pay with a gift card": "payments",
             "A pop-up says I have a virus": "tech-support",
+            "What should I do if someone calls asking for my bank PIN?": "phone-scams",
         }
         for question, expected in cases.items():
             with self.subTest(question=question):

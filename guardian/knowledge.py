@@ -12,7 +12,7 @@ TOPICS = [
         "id": "phone-scams",
         "title": "Phone call scams",
         "icon": "📞",
-        "keywords": ["call", "caller", "phone", "rang", "voicemail", "robocall",
+        "keywords": ["call", "calls", "called", "calling", "caller", "phone", "rang", "voicemail", "robocall", "bank",
                      "irs", "tax", "medicare", "social security", "police", "arrest"],
         "answer": (
             "Scammers often pretend to be from the bank, the tax office, Medicare, "

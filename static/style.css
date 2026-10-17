@@ -14,6 +14,7 @@
   --medium: #a35200;
   --low: #0b6b3a;
   --radius: 14px;
+  --on-brand: #ffffff;    /* text on brand/red backgrounds */
   font-size: 112.5%;       /* 18px base */
 }
 
@@ -30,6 +31,7 @@
     --high: #ff6b6b;
     --medium: #ffb347;
     --low: #4cd98a;
+    --on-brand: #000000;
   }
 }
 
@@ -92,9 +94,9 @@ a { color: var(--brand); }
   color: var(--text); font-weight: bold; border: 2px solid transparent;
 }
 .main-nav a:hover { border-color: var(--border); }
-.main-nav a[aria-current="page"] { background: var(--brand); color: #fff; }
+.main-nav a[aria-current="page"] { background: var(--brand); color: var(--on-brand); }
 .main-nav .nav-help { margin-left: auto; border-color: var(--high); color: var(--high); }
-.main-nav .nav-help[aria-current="page"] { background: var(--high); color: #fff; }
+.main-nav .nav-help[aria-current="page"] { background: var(--high); color: var(--on-brand); }
 
 main { flex: 1; width: 100%; max-width: 60rem; margin: 0 auto; padding: 1rem; }
 
@@ -112,18 +114,18 @@ h2 { font-size: 1.4rem; }
   display: inline-block; min-height: 3rem; padding: .6rem 1.4rem; font-size: 1.1rem; font-weight: bold;
   border-radius: var(--radius); border: 2px solid transparent; cursor: pointer; text-decoration: none;
 }
-.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary { background: var(--brand); color: var(--on-brand); }
 .btn-primary:hover { background: var(--brand-dark); }
 .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--text); }
 .btn-wide { width: 100%; margin-top: .75rem; }
-.btn-link { background: none; border: none; color: var(--brand); font-size: .95rem; cursor: pointer; padding: .25rem 0; text-decoration: underline; }
+.btn-link { background: none; border: none; color: var(--brand); font-size: .95rem; cursor: pointer; padding: .25rem 0; min-height: 44px; text-decoration: underline; }
 
 /* Chat */
 .chat-log { max-height: 32rem; overflow-y: auto; display: flex; flex-direction: column; gap: .75rem; padding-bottom: .5rem; }
 .message { padding: .75rem 1rem; border-radius: var(--radius); max-width: 90%; }
 .message p { margin: 0 0 .6rem; white-space: pre-line; }
 .message p:last-of-type { margin-bottom: 0; }
-.message.user { align-self: flex-end; background: var(--brand); color: #fff; }
+.message.user { align-self: flex-end; background: var(--brand); color: var(--on-brand); }
 .message.bot { align-self: flex-start; background: var(--bg); border: 2px solid var(--border); }
 .message.thinking { font-style: italic; color: var(--muted); }
 .message .source { font-size: .8rem; color: var(--muted); margin-top: .5rem; }
@@ -135,7 +137,8 @@ textarea, input[type="text"], input[type="tel"] {
 }
 .chat-buttons { display: flex; justify-content: flex-end; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
 .toggle { display: flex; align-items: center; gap: .5rem; margin-top: .75rem; cursor: pointer; }
-.toggle input { width: 1.5rem; height: 1.5rem; }
+.toggle { min-height: 44px; }
+.toggle input { width: 2rem; height: 2rem; }
 
 /* Topics & lessons */
 .topic-grid, .lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .75rem; }
@@ -149,7 +152,7 @@ textarea, input[type="text"], input[type="tel"] {
 .lesson-card { display: block; text-decoration: none; color: var(--text); margin: 0; }
 .lesson-card h2 { margin: .25rem 0; }
 .lesson-done { color: var(--accent); font-weight: bold; }
-.back-link { font-weight: bold; }
+.back-link { display: inline-block; font-weight: bold; padding: .6rem 0; min-height: 44px; }
 
 .big-list li { margin-bottom: .75rem; font-size: 1.1rem; }
 
@@ -160,8 +163,8 @@ textarea, input[type="text"], input[type="tel"] {
   display: block; width: 100%; text-align: left; font: inherit; padding: .75rem 1rem; margin: .4rem 0;
   border-radius: var(--radius); border: 2px solid var(--text); background: var(--surface); color: var(--text); cursor: pointer;
 }
-.quiz-option.correct { border-color: var(--low); background: var(--low); color: #fff; }
-.quiz-option.wrong { border-color: var(--high); background: var(--high); color: #fff; }
+.quiz-option.correct { border-color: var(--low); background: var(--low); color: var(--on-brand); }
+.quiz-option.wrong { border-color: var(--high); background: var(--high); color: var(--on-brand); }
 .quiz-option:disabled { cursor: default; opacity: 1; }
 .quiz-feedback, .quiz-score { font-weight: bold; font-size: 1.1rem; }
 
