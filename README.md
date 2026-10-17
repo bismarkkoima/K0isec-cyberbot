@@ -104,6 +104,7 @@ The tests use a fake model, so they don't need Ollama. They also run automatical
 ```bash
 python -m evaluation.evaluate_checker                       # scam checker accuracy on 50 labelled messages
 python -m evaluation.compare_models llama3.2:3b phi3:mini   # compare local models (needs Ollama)
+node evaluation/accessibility_audit.js                     # WCAG audit (see header for setup)
 ```
 
 The usability-study kit is in [evaluation/USER_TESTING.md](evaluation/USER_TESTING.md).

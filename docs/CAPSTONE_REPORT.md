@@ -15,6 +15,10 @@ finances and personal details.
 
 ### The scale of the problem
 
+The figures below are estimates taken from published reports and press coverage of them. They show the
+size of the problem rather than exact values, and will be checked against the primary reports as the
+project continues.
+
 - **United States - FBI.** The FBI's Internet Crime Complaint Center (IC3) reported that people aged 60 and
   over lost nearly **$4.9 billion** to online fraud in 2024, about **43% more than in 2023**, and that this
   age group filed more complaints than any other [1]. For 2023, the FBI's Elder Fraud Report had recorded
@@ -132,7 +136,8 @@ turns are accepted from the browser's history, so a client cannot inject extra s
 - **Testing:** `unittest`-style tests run with pytest; GitHub Actions CI.
 - **Security headers** follow OWASP Secure Headers guidance [9]; the web layer uses Flask [10].
 - **Evaluation tools:** `evaluation/evaluate_checker.py` (accuracy), `evaluation/compare_models.py`
-  (model comparison), `evaluation/USER_TESTING.md` (usability study kit).
+  (model comparison), `evaluation/accessibility_audit.js` (accessibility review),
+  `evaluation/USER_TESTING.md` (usability study kit).
 
 Screenshots:
 
@@ -196,6 +201,56 @@ results are likely optimistic. The set is small, and the rules were not tuned on
 these figures are an honest baseline. A fair final evaluation should use real, anonymised messages from an
 independent source and a separate held-out set.
 
+### Expert accessibility review (completed)
+
+An automated review was carried out before testing with real users, so that problems could be found and
+fixed without taking up participants' time. `evaluation/accessibility_audit.js` loads every page in a real
+browser (Chromium) and:
+
+- runs the **axe-core** accessibility engine [11] against WCAG 2.0/2.1/2.2 level A and AA rules plus
+  best practices, in **light and dark mode** at **desktop (1280px) and phone (375px)** widths (20 page checks);
+- measures every button, link and input against the 44 x 44px recommended touch-target size;
+- checks for sideways scrolling, text size at each setting, and visible keyboard focus;
+- performs the seven user-study tasks (T1-T7 in `evaluation/USER_TESTING.md`) and counts the actions each needs.
+
+**Problems found and fixed**
+
+| Issue found | Severity | Fix |
+|---|---|---|
+| In dark mode, white text on the pink/red highlighted menu item failed the colour-contrast rule on all 5 pages (10 of 20 checks) | Serious (WCAG 1.4.3) | Dark mode now uses black text on bright brand colours (`--on-brand` variable) |
+| "Read answers out loud" checkbox was 30 x 30px | Minor | Enlarged to 40px; the whole 44px-high label is also clickable |
+| "← All lessons" link was only 22px tall | Minor | Padding added to reach 44px |
+| Chat "Read aloud" buttons below 44px high | Minor | Minimum height set to 44px |
+| Built-in guide answered "someone calls asking for my bank PIN" with the *passwords* topic instead of *phone scams* | Content | Added call/bank keywords to the phone-scam topic, plus a regression test |
+
+**Results after fixes**
+
+| Check | Result |
+|---|---|
+| axe-core violations (20 page checks) | **0** (38-43 rules passed per page) |
+| Sideways scrolling at phone width | None |
+| Text size at A / A+ (default) / A++ | 16px / 20px / 24px |
+| Keyboard: first 12 Tab stops all show a visible focus outline | Yes |
+| Touch targets under 44px | Only the checkbox itself (40px), whose full-width label is also a target |
+
+**Task walkthrough** (performed automatically; times are not representative of real users)
+
+| Task | Completed | Actions needed | Outcome |
+|---|---|---|---|
+| T1 Make the text bigger | Yes | 1 | Body text 24px |
+| T2 Ask about a caller wanting the bank PIN | Yes | 2 | "📞 Phone call scams" guidance |
+| T3 Check fake Royal Mail parcel text | Yes | 3 | 🔴 High risk |
+| T4 Check genuine doctor's appointment | Yes | 3 | 🟢 Low risk |
+| T5 Check "Hi mum, new number, gift cards" | Yes | 3 | 🔴 High risk |
+| T6 Complete "How to spot a scam" lesson & quiz | Yes | 4 | Quiz score shown and progress saved |
+| T7 Find emergency help | Yes | 1 | "I think I've been scammed" page |
+
+Every task can be completed in four actions or fewer, and the emergency help page is always one tap
+away in the main menu. Automated checks cannot judge whether the wording is clear or whether older users
+feel confident, so the study below is still needed.
+
+![Scam check result](screenshots/check-result.png)
+
 ### Usability study with older adults
 
 **Method.** The full kit is in `evaluation/USER_TESTING.md`: consent statement, seven tasks, results sheet
@@ -230,7 +285,8 @@ its response time in `evaluation/model_results.csv`. Each answer is then rated f
 advice (for example telling a user to share a code or pay a caller), and answer within about 15 seconds
 on the target laptop.
 
-**Results.** *Pending: to be run on the target laptop with Ollama installed.*
+**Results.** *Pending.* The model downloads (ollama.com, registry.ollama.ai, huggingface.co) were blocked
+in the development cloud environment, so the comparison will be run on the target laptop.
 
 | Model | Size | Avg. accuracy (1-5) | Avg. simplicity (1-5) | Avg. response time | Unsafe answers |
 |---|---|---|---|---|---|
@@ -278,7 +334,7 @@ accessible, private and explained.
 | 3. Works without a model | Achieved. The built-in guide answers when no model is available, and tests cover this path. |
 | 4. Explained message checks | Achieved. 90% accuracy and 92% recall on a 50-message baseline, with every warning explained. |
 | 5. Lessons and quizzes | Achieved. Four lessons with quizzes and saved progress. |
-| 6. Accessibility | Implemented following WCAG 2.2 guidance. Confirmation by the usability study is pending. |
+| 6. Accessibility | Achieved at the technical level: 0 axe-core WCAG 2.2 AA violations across 20 page checks after fixing the dark-mode contrast and touch-target issues. Confirmation with older users is pending. |
 | 7. Secure development | Achieved. Secrets removed from the repository, input validation, CSP and security headers, 28 automated tests and CI. |
 
 The project shows that a small open model running on an ordinary laptop, grounded by a curated safety
@@ -319,3 +375,5 @@ Practices*. Measuring Usability LLC.
 [9] OWASP Foundation. *OWASP Secure Headers Project*. https://owasp.org/www-project-secure-headers/
 
 [10] Pallets Projects. *Flask documentation*. https://flask.palletsprojects.com/
+
+[11] Deque Systems. *axe-core: accessibility engine for automated web UI testing*. https://github.com/dequelabs/axe-core
